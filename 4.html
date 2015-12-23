@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<!-- Button to do a Ajax call that returns the JSON created in 3.
+	As I understand this question, you expect the server to return the JSON. -->
+<head>
+	<title>Question 4</title>
+</head>
+<body>
+<button id="ajaxBtn"></button>
+<script type="text/javascript">
+	window.onload = function() {
+		var aBtn = document.getElementById('ajaxBtn');
+
+		var clickHandler = function() {
+			doRequest("site.html");
+		};
+
+		var doRequest = function(url) {
+			var httpRequest = new XMLHttpRequest();
+
+			if (!httpRequest) {
+				alert("Oops! Browser doesn't support XHR.");
+			}
+
+			httpRequest.onReadyStateChanged = showContent;
+			httpRequest.open("GET", url);
+			httpRequest.send();
+		}
+
+		var showContent = function() {
+			if (httpRequest.readyState === XMLHttpRequest.DONE) {
+				if (httpRequest.status === 200) {
+					alert(httpRequest.responseText);
+				} else {
+					alert('Problem with the request');
+				}
+			}
+		}
+
+		aBtn.addEventListenter("click", clickHandler);
+	}
+</script>
+</body>
+</html>
